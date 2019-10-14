@@ -114,7 +114,6 @@ Future<void> runTestsAndCollect(String packageRoot, String port) async {
       serviceUri,
       true,
       true,
-      timeout: Duration(milliseconds: 100),
     );
     final data = await futureData;
     hitmap = coverage.createHitmap(await data['coverage']);
