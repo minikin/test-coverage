@@ -110,14 +110,14 @@ Future<void> runTestsAndCollect(String packageRoot, String port) async {
 
   Map<String, Map<int, int>> hitmap;
   try {
-    final data = await coverage.collect(
+    final Future<Map<String, dynamic>> futureData = coverage.collect(
       serviceUri,
       true,
       true,
       timeout: Duration(milliseconds: 100),
     );
-
-    hitmap = coverage.createHitmap(data['coverage']);
+    final data = await futureData;
+    hitmap = coverage.createHitmap(await data['coverage']);
   } finally {
     await process.stderr.drain<List<int>>();
   }
